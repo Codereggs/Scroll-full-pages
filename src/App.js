@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback } from "react";
+import "./styles/style.css";
+import { debounce, moveInScreen } from "./utils/functions";
 
 function App() {
+  const debouncedCallback = useCallback(debounce(moveInScreen, 400), []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <header className="App-header">
+          <div className="sections" onWheel={debouncedCallback}>
+            <div className="section vertical uno active">
+              <h1>Animejs plugins</h1>
+            </div>
+            <div className="section vertical dos">
+              <h1 className="purple">Animejs plugins</h1>
+            </div>
+            <div className="section horizontal tres">
+              <h1>Animejs plugins</h1>
+            </div>
+            <div className="section horizontal cuatro">
+              <h1>Animejs plugins</h1>
+            </div>
+          </div>
+        </header>
+      </div>
+    </>
   );
 }
 
