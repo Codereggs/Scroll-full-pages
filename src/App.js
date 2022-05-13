@@ -1,27 +1,26 @@
-import { useCallback } from "react";
+import ChildsScrollSection from "./components/ChildsScrollSection";
+import MainScrollSection from "./components/MainScrollSection";
 import "./styles/style.css";
-import { debounce, moveInScreen } from "./utils/functions";
 
 function App() {
-  const debouncedCallback = useCallback(debounce(moveInScreen, 400), []);
   return (
     <>
       <div className="App">
         <header className="App-header">
-          <div className="sections" onWheel={debouncedCallback}>
-            <div className="section vertical uno active">
+          <MainScrollSection>
+            <ChildsScrollSection className="active">
               <h1>Animejs plugins</h1>
-            </div>
-            <div className="section vertical dos">
-              <h1 className="purple">Animejs plugins</h1>
-            </div>
-            <div className="section horizontal tres">
+            </ChildsScrollSection>
+            <ChildsScrollSection>
               <h1>Animejs plugins</h1>
-            </div>
-            <div className="section horizontal cuatro">
+            </ChildsScrollSection>
+            <ChildsScrollSection>
               <h1>Animejs plugins</h1>
-            </div>
-          </div>
+            </ChildsScrollSection>
+            <ChildsScrollSection>
+              <h1>Animejs plugins</h1>
+            </ChildsScrollSection>
+          </MainScrollSection>
         </header>
       </div>
     </>

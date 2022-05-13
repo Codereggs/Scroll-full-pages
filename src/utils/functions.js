@@ -1,5 +1,5 @@
 //Global Vars
-var actualSec = 0;
+var actualSec = -2;
 var verticalCount = 0;
 var horizontalCount = 0;
 var isChanging = { direction: "none" };
@@ -18,11 +18,6 @@ export const debounce = (callback, wait) => {
 //Move in screen
 export const moveInScreen = (e) => {
   getUpDown(e.deltaY > 0 ? true : false, ".sections");
-};
-
-// Medidor
-const medidor = (i) => {
-  console.log(i);
 };
 
 //Horizontal Movement - Sections
@@ -73,7 +68,7 @@ const verticalSec = (sectionsDiv, direction) => {
 
 const deleteActiveAndStyles = (sec, index) => {
   sec.classList.remove("active");
-  sec.removeAttribute("style");
+
   actualSec = index;
 };
 
@@ -81,7 +76,10 @@ const deleteActiveAndStyles = (sec, index) => {
 export const getUpDown = async (bool, section) => {
   const d = document;
   const sectionsDiv = d.querySelector(section);
+  console.log(sectionsDiv);
   const sections = d.querySelector(section).childNodes;
+
+  console.log(horizontalCount, verticalCount, actualSec);
   //Abajo
   if (bool) {
     sections.forEach((sec, index) => {
@@ -139,3 +137,23 @@ export const getUpDown = async (bool, section) => {
       });
   }
 };
+
+export const css = new (function () {
+  function addStyleSheet() {
+    let head = document.head;
+    let style = document.createElement("style");
+
+    head.appendChild(style);
+  }
+
+  this.insert = function (rule) {
+    if (document.styleSheets.length === 0) {
+      addStyleSheet();
+    }
+
+    let sheet = document.styleSheets[document.styleSheets.length - 1];
+    let rules = sheet.rules;
+
+    sheet.insertRule(rule, rules.length);
+  };
+})();

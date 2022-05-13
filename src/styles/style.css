@@ -17,7 +17,7 @@ body {
   font-family: "Josefin Sans", sans-serif;
   overflow: hidden;
 }
-
+/* 
 .sections {
   position: relative;
   height: 100vh;
@@ -57,13 +57,22 @@ body {
   top: 100%;
   left: 200%;
 }
+.section:nth-child(5) {
+  background-color: gray;
+  position: absolute;
+  top: 100%;
+  left: 300%;
+}
+.section:nth-child(6) {
+  background-color: gray;
+  position: absolute;
+  top: 100%;
+  left: 400%;
+} */
 
 h1 {
   font-size: 70px;
 }
 h1.purple {
   color: var(--purple);
-}
-.section:not(:first-child) h1 {
-  opacity: 0;
 }
