@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, useCallback } from "react";
+import React, { Children, cloneElement, useCallback, useEffect } from "react";
 import { debounce, moveInScreen } from "../utils/functions";
 
 const MainScrollSection = ({ children }) => {
@@ -36,6 +36,7 @@ const MainScrollSection = ({ children }) => {
       },
       verticalCount: verticalCount,
       horizontalCount: horizontalCount,
+      active: el?.props?.active ? el?.props?.active : undefined,
     });
   });
 
@@ -51,6 +52,12 @@ const MainScrollSection = ({ children }) => {
 
   //Para el movimiento
   const debouncedCallback = useCallback(debounce(moveInScreen, 400), []);
+
+  //Sumar al html
+  useEffect(() => {
+    document.body.style = `margin: 0; overflow: hidden;`;
+  }, []);
+
   return (
     <div style={mainStyles} className="sections" onWheel={debouncedCallback}>
       {clonedChildren}

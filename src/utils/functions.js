@@ -17,6 +17,7 @@ export const debounce = (callback, wait) => {
 
 //Move in screen
 export const moveInScreen = (e) => {
+  console.log("deltaY", e.deltaY);
   getUpDown(e.deltaY > 0 ? true : false, ".sections");
 };
 
@@ -88,6 +89,7 @@ export const getUpDown = async (bool, section) => {
   //Abajo
   if (bool) {
     sections.forEach((sec, index) => {
+      console.log("sec", sec, "index", index);
       //Intersection observer delete active class
       if (sec.classList.contains("active")) {
         //Ultimate
@@ -104,6 +106,7 @@ export const getUpDown = async (bool, section) => {
           return horizontalSec(sectionsDiv, "right");
       }
     });
+    actualSec = -2;
   }
   //Arriba
   else {
@@ -111,6 +114,7 @@ export const getUpDown = async (bool, section) => {
       .slice()
       .reverse()
       .forEach((sec, index) => {
+        console.log("sec", sec, "index", index);
         if (sec.classList.contains("active")) {
           if (index === sections.length - 1) return;
           // Function delete active
@@ -120,6 +124,7 @@ export const getUpDown = async (bool, section) => {
             isChanging.direction = "horizontal";
           if (sec.classList.contains("vertical"))
             isChanging.direction = "vertical";
+          console.log("actualsec", actualSec);
         }
         if (index === actualSec + 1) {
           sec.classList.add("active");
@@ -140,5 +145,6 @@ export const getUpDown = async (bool, section) => {
             return horizontalSec(sectionsDiv, "left");
         }
       });
+    actualSec = -2;
   }
 };

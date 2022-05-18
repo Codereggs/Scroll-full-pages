@@ -1,20 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 
-const ChildsScrollSection = ({ direction, children, style, className }) => {
+const ChildsScrollSection = ({ direction, children, style, active }) => {
   const childrenRef = useRef();
-  //Direcciones
-  const [axis, setAxis] = useState(direction);
-  useEffect(() => {
-    if (direction === "horizontal") setAxis("horizontal");
-    else setAxis("vertical");
-  }, []);
 
   const childrenStyles = {
     ...style,
   };
 
   const clases = () => {
-    return `${axis} section${!className ? "" : " " + className}`;
+    return `${direction} section${!active ? "" : " active"}`;
   };
 
   return (
