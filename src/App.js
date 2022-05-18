@@ -14,10 +14,10 @@ function App() {
             <ChildsScrollSection>
               <h1>Animejs plugins</h1>
             </ChildsScrollSection>
-            <ChildsScrollSection>
+            <ChildsScrollSection direction="vertical">
               <h1>Animejs plugins</h1>
             </ChildsScrollSection>
-            <ChildsScrollSection>
+            <ChildsScrollSection direction="horizontal">
               <h1>Animejs plugins</h1>
             </ChildsScrollSection>
           </MainScrollSection>

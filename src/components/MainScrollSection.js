@@ -1,20 +1,47 @@
 import React, { Children, cloneElement, useCallback } from "react";
-import { css, debounce, moveInScreen } from "../utils/functions";
+import { debounce, moveInScreen } from "../utils/functions";
 
 const MainScrollSection = ({ children }) => {
+  let horizontalCount = 0;
+  let verticalCount = 0;
+
   const arrayChildren = Children.toArray(children);
-  const clonedChildren = arrayChildren.map((el, i) => {
+  const clonedChildren = arrayChildren.map((el, i, arr) => {
+    if (i > 0) {
+      console.log(arr[i]);
+      if (arr[i].props.direction === "horizontal") horizontalCount++;
+      if (arr[i].props.direction === "vertical" || !arr[i].props.direction)
+        verticalCount++;
+    }
+    console.log("horizontal y vertical", horizontalCount, verticalCount);
+    console.log("top", el?.props?.direction === "horizontal" && i > 0);
+    console.log(
+      "left",
+      (el?.props?.direction === "vertical" || !el?.props?.direction) && i > 0
+    );
+
+    const left = () => {
+      if (i === 0) return "0%";
+      return `${horizontalCount * 100}%`;
+    };
+    const top = () => {
+      if (i === 0) return "0%";
+      return `${verticalCount * 100}%`;
+    };
     return cloneElement(el, {
       key: i,
       index: i,
-      direction: el?.direction === "horizontal" ? "horizontal" : "vertical",
+      direction:
+        el?.props?.direction === "horizontal" ? "horizontal" : "vertical",
       style: {
         position: "absolute",
-        top: (el?.direction === "horizontal") & (i > 0) ? "0%" : `${i * 100}%`,
-        left: (el?.direction === "horizontal") & (i > 0) ? `${i * 100}%` : `0%`,
+        top: top(),
+        left: left(),
         height: "100%",
         width: "100%",
       },
+      verticalCount: verticalCount,
+      horizontalCount: horizontalCount,
     });
   });
 

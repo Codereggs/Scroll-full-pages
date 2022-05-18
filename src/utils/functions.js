@@ -28,7 +28,9 @@ const horizontalSec = (sectionsDiv, direction) => {
       "style",
       `transform: translate3d(${
         horizontalCount === 0 ? 0 + "%" : `-${horizontalCount}00%`
-      }, ${verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`}, 0px);`
+      }, ${
+        verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`
+      }, 0px);position: relative;height: 100vh;width: 100vw;transition: all 1s ease 0s;`
     );
   }
   if (direction === "left") {
@@ -37,7 +39,9 @@ const horizontalSec = (sectionsDiv, direction) => {
       "style",
       `transform: translate3d(${
         horizontalCount === 0 ? 0 + "%" : `-${horizontalCount}00%`
-      }, ${verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`}, 0px);`
+      }, ${
+        verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`
+      }, 0px);position: relative;height: 100vh;width: 100vw;transition: all 1s ease 0s;`
     );
   }
 };
@@ -50,7 +54,9 @@ const verticalSec = (sectionsDiv, direction) => {
       "style",
       `transform: translate3d(${
         horizontalCount === 0 ? 0 + "%" : `-${horizontalCount}00%`
-      }, ${verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`}, 0px);`
+      }, ${
+        verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`
+      }, 0px);position: relative;height: 100vh;width: 100vw;transition: all 1s ease 0s;`
     );
   }
   if (direction === "up") {
@@ -59,7 +65,9 @@ const verticalSec = (sectionsDiv, direction) => {
       "style",
       `transform: translate3d(${
         horizontalCount === 0 ? 0 + "%" : `-${horizontalCount}00%`
-      }, ${verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`}, 0px);`
+      }, ${
+        verticalCount === 0 ? 0 + "%" : `-${verticalCount}00%`
+      }, 0px);position: relative;height: 100vh;width: 100vw;transition: all 1s ease 0s;`
     );
   }
 };
@@ -68,7 +76,6 @@ const verticalSec = (sectionsDiv, direction) => {
 
 const deleteActiveAndStyles = (sec, index) => {
   sec.classList.remove("active");
-
   actualSec = index;
 };
 
@@ -76,10 +83,8 @@ const deleteActiveAndStyles = (sec, index) => {
 export const getUpDown = async (bool, section) => {
   const d = document;
   const sectionsDiv = d.querySelector(section);
-  console.log(sectionsDiv);
   const sections = d.querySelector(section).childNodes;
 
-  console.log(horizontalCount, verticalCount, actualSec);
   //Abajo
   if (bool) {
     sections.forEach((sec, index) => {
@@ -137,23 +142,3 @@ export const getUpDown = async (bool, section) => {
       });
   }
 };
-
-export const css = new (function () {
-  function addStyleSheet() {
-    let head = document.head;
-    let style = document.createElement("style");
-
-    head.appendChild(style);
-  }
-
-  this.insert = function (rule) {
-    if (document.styleSheets.length === 0) {
-      addStyleSheet();
-    }
-
-    let sheet = document.styleSheets[document.styleSheets.length - 1];
-    let rules = sheet.rules;
-
-    sheet.insertRule(rule, rules.length);
-  };
-})();

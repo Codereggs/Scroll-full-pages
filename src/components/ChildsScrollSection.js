@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { css } from "../utils/functions";
 
-const ChildsScrollSection = ({
-  direction = "vertical",
-  children,
-  style,
-  className,
-  index,
-}) => {
+const ChildsScrollSection = ({ direction, children, style, className }) => {
   const childrenRef = useRef();
   //Direcciones
-  const [axis, setAxis] = useState("vertical");
-  if (direction === "horizontal") setAxis("horizontal");
+  const [axis, setAxis] = useState(direction);
+  useEffect(() => {
+    console.log(direction);
+    if (direction === "horizontal") setAxis("horizontal");
+    else setAxis("vertical");
+  }, []);
 
   const childrenStyles = {
     ...style,
