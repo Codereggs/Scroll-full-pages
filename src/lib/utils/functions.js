@@ -73,7 +73,7 @@ const verticalSec = (sectionsDiv, direction) => {
   }
 };
 
-// Borrar Active y estilos
+// Delete active and styles
 
 const deleteActiveAndStyles = (sec, index) => {
   sec.classList.remove("active");
@@ -86,7 +86,7 @@ export const getUpDown = async (bool, section) => {
   const sectionsDiv = d.querySelector(section);
   const sections = d.querySelector(section).childNodes;
 
-  //Abajo
+  //Down
   if (bool) {
     sections.forEach((sec, index) => {
       console.log("sec", sec, "index", index);
@@ -108,7 +108,7 @@ export const getUpDown = async (bool, section) => {
     });
     actualSec = -2;
   }
-  //Arriba
+  //Up
   else {
     Array.from(sections)
       .slice()

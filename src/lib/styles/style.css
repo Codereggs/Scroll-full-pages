@@ -1,0 +1,15 @@
+/*Styles*/
+
+body,
+html {
+  font-size: 40px;
+}
+
+h1 {
+  font-size: 70px;
+  text-align: center;
+  width: 100%;
+}
+h1.purple {
+  color: var(--purple);
+}
