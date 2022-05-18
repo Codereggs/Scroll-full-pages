@@ -5,7 +5,6 @@ const ChildsScrollSection = ({ direction, children, style, className }) => {
   //Direcciones
   const [axis, setAxis] = useState(direction);
   useEffect(() => {
-    console.log(direction);
     if (direction === "horizontal") setAxis("horizontal");
     else setAxis("vertical");
   }, []);

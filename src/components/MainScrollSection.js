@@ -8,17 +8,10 @@ const MainScrollSection = ({ children }) => {
   const arrayChildren = Children.toArray(children);
   const clonedChildren = arrayChildren.map((el, i, arr) => {
     if (i > 0) {
-      console.log(arr[i]);
       if (arr[i].props.direction === "horizontal") horizontalCount++;
       if (arr[i].props.direction === "vertical" || !arr[i].props.direction)
         verticalCount++;
     }
-    console.log("horizontal y vertical", horizontalCount, verticalCount);
-    console.log("top", el?.props?.direction === "horizontal" && i > 0);
-    console.log(
-      "left",
-      (el?.props?.direction === "vertical" || !el?.props?.direction) && i > 0
-    );
 
     const left = () => {
       if (i === 0) return "0%";
@@ -28,6 +21,7 @@ const MainScrollSection = ({ children }) => {
       if (i === 0) return "0%";
       return `${verticalCount * 100}%`;
     };
+
     return cloneElement(el, {
       key: i,
       index: i,
