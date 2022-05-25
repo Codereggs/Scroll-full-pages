@@ -1,11 +1,24 @@
-import React, { Children, cloneElement, useCallback, useEffect } from "react";
-import { debounce, moveInScreen } from "../utils/functions";
+import React, { cloneElement, useCallback } from "react";
+import { debounce, moveInScreen } from "../../utils/functions";
+import "./MainScrollSection.css";
 
-const MainScrollSection = ({ children }) => {
-  let horizontalCount = 0;
-  let verticalCount = 0;
+interface Props {
+  children: React.PropsWithChildren<{ props: any; type: any; key: number }>[];
+}
 
-  const arrayChildren = Children.toArray(children);
+type mainStylesType = {
+  position: any;
+  height: string;
+  width: string;
+  transition: string;
+  transform: string;
+};
+
+const MainScrollSection: React.FC<Props> = ({ children }: Props) => {
+  let horizontalCount: number = 0;
+  let verticalCount: number = 0;
+
+  const arrayChildren = children;
   const clonedChildren = arrayChildren.map((el, i, arr) => {
     if (i > 0) {
       if (arr[i].props.direction === "horizontal") horizontalCount++;
@@ -13,11 +26,11 @@ const MainScrollSection = ({ children }) => {
         verticalCount++;
     }
 
-    const left = () => {
+    const left: () => string = (): string => {
       if (i === 0) return "0%";
       return `${horizontalCount * 100}%`;
     };
-    const top = () => {
+    const top: () => string = (): string => {
       if (i === 0) return "0%";
       return `${verticalCount * 100}%`;
     };
@@ -42,7 +55,7 @@ const MainScrollSection = ({ children }) => {
 
   //Estilos
 
-  const mainStyles = {
+  const mainStyles: mainStylesType = {
     position: "relative",
     height: "100vh",
     width: "100vw",
@@ -52,11 +65,6 @@ const MainScrollSection = ({ children }) => {
 
   //Para el movimiento
   const debouncedCallback = useCallback(debounce(moveInScreen, 400), []);
-
-  //Sumar al html
-  useEffect(() => {
-    document.body.style = `margin: 0; overflow: hidden;`;
-  }, []);
 
   return (
     <div style={mainStyles} className="sections" onWheel={debouncedCallback}>
