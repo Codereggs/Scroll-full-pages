@@ -1,12 +1,15 @@
 //Global Vars
-var actualSec = -2;
-var verticalCount = 0;
-var horizontalCount = 0;
-var isChanging = { direction: "none" };
+var actualSec: number = -2;
+var verticalCount: number = 0;
+var horizontalCount: number = 0;
+var isChanging: { direction: string } = { direction: "none" };
 
 // Debounce
-export const debounce = (callback, wait) => {
-  let timerId;
+export const debounce: (
+  callback: any,
+  wait: any
+) => (...args: any[]) => void = (callback, wait) => {
+  let timerId: any;
   return (...args) => {
     if (timerId) clearTimeout(timerId);
     timerId = setTimeout(() => {
@@ -15,14 +18,19 @@ export const debounce = (callback, wait) => {
   };
 };
 
+const section: string = ".sections";
+
 //Move in screen
-export const moveInScreen = (e) => {
-  console.log("deltaY", e.deltaY);
-  getUpDown(e.deltaY > 0 ? true : false, ".sections");
+export const moveInScreen: (e: any) => void = (e: any) => {
+  getUpDown(e.deltaY > 0, section);
+};
+
+type directionsParams = {
+  (sectionsDiv: Element, direction: string): void;
 };
 
 //Horizontal Movement - Sections
-const horizontalSec = (sectionsDiv, direction) => {
+const horizontalSec: directionsParams = (sectionsDiv, direction) => {
   if (direction === "right") {
     horizontalCount++;
     sectionsDiv.setAttribute(
@@ -48,7 +56,7 @@ const horizontalSec = (sectionsDiv, direction) => {
 };
 
 //Vertical Movement - Sections
-const verticalSec = (sectionsDiv, direction) => {
+const verticalSec: directionsParams = (sectionsDiv, direction) => {
   if (direction === "down") {
     verticalCount++;
     sectionsDiv.setAttribute(
@@ -73,23 +81,28 @@ const verticalSec = (sectionsDiv, direction) => {
   }
 };
 
-// Borrar Active y estilos
+// Delete active and styles
 
-const deleteActiveAndStyles = (sec, index) => {
+const deleteActiveAndStyles: (sec: any, index: number) => void = (
+  sec: any,
+  index: number
+) => {
   sec.classList.remove("active");
   actualSec = index;
 };
 
 // Get up down
-export const getUpDown = async (bool, section) => {
-  const d = document;
-  const sectionsDiv = d.querySelector(section);
-  const sections = d.querySelector(section).childNodes;
-
-  //Abajo
+export const getUpDown: (bool: boolean, section: string) => void = async (
+  bool,
+  section = ".sections"
+) => {
+  const d: Document = document;
+  const sectionsDiv = d.querySelector(section) as HTMLElement;
+  if (sectionsDiv === null) return;
+  const sections = sectionsDiv.children;
+  //Down
   if (bool) {
-    sections.forEach((sec, index) => {
-      console.log("sec", sec, "index", index);
+    Array.from(sections).forEach((sec, index) => {
       //Intersection observer delete active class
       if (sec.classList.contains("active")) {
         //Ultimate
@@ -108,7 +121,7 @@ export const getUpDown = async (bool, section) => {
     });
     actualSec = -2;
   }
-  //Arriba
+  //Up
   else {
     Array.from(sections)
       .slice()
