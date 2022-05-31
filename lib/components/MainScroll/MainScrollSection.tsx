@@ -25,7 +25,6 @@ const MainScrollSection: React.FC<Props> = ({ children }) => {
   let horizontalCount: number = 0;
   let verticalCount: number = 0;
 
-  console.log("children es", children);
   const arrayChildren = Array.isArray(children) ? children : [children];
   const clonedChildren = arrayChildren.map((el, i, arr) => {
     if (i > 0) {

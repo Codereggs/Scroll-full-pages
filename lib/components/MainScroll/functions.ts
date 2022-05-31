@@ -113,7 +113,6 @@ const getUpDown: (bool: boolean, section: string) => void = async (
       .slice()
       .reverse()
       .forEach((sec, index) => {
-        console.log("sec", sec, "index", index);
         if (sec.classList.contains("active")) {
           if (index === sections.length - 1) return;
           // Function delete active
@@ -123,7 +122,6 @@ const getUpDown: (bool: boolean, section: string) => void = async (
             isChanging.direction = "horizontal";
           if (sec.classList.contains("vertical"))
             isChanging.direction = "vertical";
-          console.log("actualsec", actualSec);
         }
         if (index === actualSec + 1) {
           sec.classList.add("active");
