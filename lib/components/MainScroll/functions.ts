@@ -4,20 +4,6 @@ var verticalCount: number = 0;
 var horizontalCount: number = 0;
 var isChanging: { direction: string } = { direction: "none" };
 
-// Debounce
-export const debounce: (
-  callback: any,
-  wait: any
-) => (...args: any[]) => void = (callback, wait) => {
-  let timerId: any;
-  return (...args) => {
-    if (timerId) clearTimeout(timerId);
-    timerId = setTimeout(() => {
-      callback(...args);
-    }, wait);
-  };
-};
-
 const section: string = ".sections";
 
 //Move in screen

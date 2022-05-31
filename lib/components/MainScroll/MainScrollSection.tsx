@@ -1,19 +1,16 @@
-import React, { cloneElement, useCallback } from "react";
-import { debounce, moveInScreen } from "@libs/utils/functions";
+import React, { cloneElement } from "react";
+import { moveInScreen } from "./functions";
 import "./MainScrollSection.css";
-
+interface ChildProp {
+  direction: string;
+  index?: number;
+  style: React.CSSProperties | undefined;
+  verticalCount: number;
+  horizontalCount: number;
+  active?: boolean | undefined;
+}
 interface Props {
-  children: React.ReactElement<{
-    props: any;
-    type: any;
-    key: number;
-    direction: string;
-    active: string;
-    index: number;
-    style: any;
-    verticalCount: number;
-    horizontalCount: number;
-  }>[];
+  children: React.ReactElement<ChildProp>[];
 }
 
 type mainStylesType = {
@@ -24,11 +21,12 @@ type mainStylesType = {
   transform: string;
 };
 
-const MainScrollSection: React.FC<Props> = ({ children }: Props) => {
+const MainScrollSection: React.FC<Props> = ({ children }) => {
   let horizontalCount: number = 0;
   let verticalCount: number = 0;
 
-  const arrayChildren = children;
+  console.log("children es", children);
+  const arrayChildren = Array.isArray(children) ? children : [children];
   const clonedChildren = arrayChildren.map((el, i, arr) => {
     if (i > 0) {
       if (arr[i].props.direction === "horizontal") horizontalCount++;
@@ -73,9 +71,23 @@ const MainScrollSection: React.FC<Props> = ({ children }: Props) => {
     transform: "translate3d(0%, 0%, 0px)",
   };
 
+  // Debounce
+  const debounce: (callback: any, wait: any) => (...args: any[]) => void = (
+    callback,
+    wait
+  ) => {
+    let timerId: any;
+    return (...args) => {
+      if (timerId) clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        callback(...args);
+      }, wait);
+    };
+  };
+
   //Para el movimiento
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedCallback = useCallback(debounce(moveInScreen, 400), []);
+
+  const debouncedCallback = debounce(moveInScreen, 400);
 
   return (
     <div style={mainStyles} className="sections" onWheel={debouncedCallback}>
