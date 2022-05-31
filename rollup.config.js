@@ -20,7 +20,6 @@ export default [
       {
         file: packageJson.module,
         format: "esm",
-        sourcemap: false,
       },
     ],
     plugins: [
