@@ -60,7 +60,7 @@ const MainScrollSection: React.FC<Props> = ({ children }) => {
     });
   });
 
-  //Estilos
+  //Styles
 
   const mainStyles: mainStylesType = {
     position: "relative",
@@ -84,7 +84,7 @@ const MainScrollSection: React.FC<Props> = ({ children }) => {
     };
   };
 
-  //Para el movimiento
+  //To movement
 
   const debouncedCallback = debounce(moveInScreen, 400);
 
