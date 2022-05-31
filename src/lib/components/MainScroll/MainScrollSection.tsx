@@ -1,5 +1,5 @@
 import React, { cloneElement, useCallback } from "react";
-import { debounce, moveInScreen } from "../../utils/functions";
+import { debounce, moveInScreen } from "@libs/utils/functions";
 import "./MainScrollSection.css";
 
 interface Props {
@@ -64,6 +64,7 @@ const MainScrollSection: React.FC<Props> = ({ children }: Props) => {
   };
 
   //Para el movimiento
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedCallback = useCallback(debounce(moveInScreen, 400), []);
 
   return (

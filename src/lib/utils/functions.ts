@@ -92,7 +92,7 @@ const deleteActiveAndStyles: (sec: any, index: number) => void = (
 };
 
 // Get up down
-export const getUpDown: (bool: boolean, section: string) => void = async (
+const getUpDown: (bool: boolean, section: string) => void = async (
   bool,
   section = ".sections"
 ) => {
