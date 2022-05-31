@@ -3,7 +3,17 @@ import { debounce, moveInScreen } from "@libs/utils/functions";
 import "./MainScrollSection.css";
 
 interface Props {
-  children: React.PropsWithChildren<{ props: any; type: any; key: number }>[];
+  children: React.ReactElement<{
+    props: any;
+    type: any;
+    key: number;
+    direction: string;
+    active: string;
+    index: number;
+    style: any;
+    verticalCount: number;
+    horizontalCount: number;
+  }>[];
 }
 
 type mainStylesType = {
